@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BLADE — Barbershop Paris</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,600;1,300&family=Barlow+Condensed:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --noir: #0d0d0d;
+  --blanc: #f0ece4;
+  --rouge: #c0392b;
+  --gris: #1a1a1a;
+  --gris2: #2a2a2a;
+  --texte: #8a8a8a;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--noir);color:var(--blanc);font-family:'Barlow',sans-serif;overflow-x:hidden;}
+
+/* GRAIN */
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");pointer-events:none;z-index:999;opacity:.5;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;padding:0 60px;height:70px;display:flex;justify-content:space-between;align-items:center;background:rgba(13,13,13,0.95);border-bottom:1px solid rgba(255,255,255,0.05);}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.2em;color:var(--blanc);}
+.logo span{color:var(--rouge);}
+.nav-links{display:flex;gap:36px;list-style:none;}
+.nav-links a{font-family:'Barlow Condensed',sans-serif;font-size:0.85rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--texte);text-decoration:none;transition:color .2s;}
+.nav-links a:hover{color:var(--blanc);}
+.nav-cta{padding:10px 24px;background:var(--rouge);color:var(--blanc);font-family:'Barlow Condensed',sans-serif;font-size:0.8rem;letter-spacing:0.2em;text-transform:uppercase;text-decoration:none;transition:background .2s;}
+.nav-cta:hover{background:#a93226;}
+
+/* HERO */
+.hero{height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:70px;overflow:hidden;}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:80px 60px;position:relative;}
+.hero-left::after{content:'';position:absolute;right:0;top:10%;bottom:10%;width:1px;background:linear-gradient(to bottom,transparent,rgba(192,57,43,0.4),transparent);}
+.hero-num{font-family:'Bebas Neue',sans-serif;font-size:14rem;line-height:1;color:rgba(255,255,255,0.03);position:absolute;top:50%;left:40px;transform:translateY(-50%);pointer-events:none;user-select:none;}
+.hero-tag{font-family:'Barlow Condensed',sans-serif;font-size:0.75rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--rouge);margin-bottom:20px;opacity:0;animation:fadeIn 1s .2s forwards;}
+h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,8vw,7rem);line-height:.95;letter-spacing:0.05em;color:var(--blanc);margin-bottom:32px;opacity:0;animation:fadeIn 1s .4s forwards;}
+h1 .line-red{color:var(--rouge);}
+.hero-sub{font-size:1rem;line-height:1.7;color:var(--texte);max-width:380px;margin-bottom:48px;font-weight:300;opacity:0;animation:fadeIn 1s .6s forwards;}
+.hero-btns{display:flex;gap:16px;opacity:0;animation:fadeIn 1s .8s forwards;}
+.btn-r{padding:16px 40px;background:var(--rouge);color:var(--blanc);font-family:'Barlow Condensed',sans-serif;font-size:0.85rem;letter-spacing:0.2em;text-transform:uppercase;text-decoration:none;transition:all .2s;}
+.btn-r:hover{background:#a93226;transform:translateY(-2px);}
+.btn-ghost{padding:16px 40px;border:1px solid rgba(255,255,255,0.2);color:var(--blanc);font-family:'Barlow Condensed',sans-serif;font-size:0.85rem;letter-spacing:0.2em;text-transform:uppercase;text-decoration:none;transition:all .2s;}
+.btn-ghost:hover{border-color:var(--blanc);}
+
+.hero-right{background:var(--gris);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.hero-right::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.02) 40px,rgba(255,255,255,0.02) 41px),repeating-linear-gradient(90deg,transparent,transparent 40px,rgba(255,255,255,0.02) 40px,rgba(255,255,255,0.02) 41px);}
+.hero-icon-big{font-size:8rem;opacity:.15;position:absolute;}
+.hero-card{position:relative;z-index:2;text-align:center;}
+.scissors{font-size:5rem;display:block;margin-bottom:20px;animation:spin 8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.hero-card-text{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:0.3em;color:var(--texte);}
+
+/* SERVICES */
+.services{padding:100px 60px;background:var(--gris);}
+.services-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:60px;}
+.services-header h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,4rem);letter-spacing:0.05em;}
+.services-header p{color:var(--texte);font-size:.9rem;max-width:300px;text-align:right;line-height:1.7;}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.service-card{background:var(--noir);padding:48px 40px;border:1px solid rgba(255,255,255,0.04);transition:all .3s;cursor:default;position:relative;overflow:hidden;}
+.service-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--rouge);transform:scaleX(0);transition:transform .3s;}
+.service-card:hover{background:#111;border-color:rgba(192,57,43,0.2);}
+.service-card:hover::before{transform:scaleX(1);}
+.service-icon{font-size:2rem;margin-bottom:20px;display:block;}
+.service-name{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:0.05em;margin-bottom:12px;}
+.service-desc{font-size:.85rem;color:var(--texte);line-height:1.7;margin-bottom:24px;font-weight:300;}
+.service-price{font-family:'Barlow Condensed',sans-serif;font-size:1.4rem;color:var(--rouge);letter-spacing:0.05em;}
+.service-time{font-size:.75rem;color:var(--texte);letter-spacing:.1em;margin-top:4px;}
+
+/* TEAM */
+.team{padding:100px 60px;}
+.team-tag{font-family:'Barlow Condensed',sans-serif;font-size:.75rem;letter-spacing:.4em;text-transform:uppercase;color:var(--rouge);margin-bottom:16px;}
+.team h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,4rem);margin-bottom:60px;letter-spacing:.05em;}
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.team-card{background:var(--gris);border:1px solid rgba(255,255,255,.04);overflow:hidden;}
+.team-photo{height:280px;background:var(--gris2);display:flex;align-items:center;justify-content:center;font-size:5rem;position:relative;}
+.team-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,var(--gris),transparent);}
+.team-info{padding:28px;}
+.team-name{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:.05em;margin-bottom:6px;}
+.team-role{font-family:'Barlow Condensed',sans-serif;font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--rouge);}
+.team-exp{font-size:.85rem;color:var(--texte);margin-top:12px;font-weight:300;}
+
+/* BOOKING */
+.booking{padding:100px 60px;background:var(--rouge);position:relative;overflow:hidden;}
+.booking::before{content:'BOOK';position:absolute;right:-20px;top:50%;transform:translateY(-50%);font-family:'Bebas Neue',sans-serif;font-size:20rem;line-height:1;opacity:.08;pointer-events:none;}
+.booking-inner{max-width:700px;position:relative;z-index:2;}
+.booking-tag{font-family:'Barlow Condensed',sans-serif;font-size:.75rem;letter-spacing:.4em;text-transform:uppercase;color:rgba(240,236,228,.6);margin-bottom:16px;}
+.booking h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,6vw,5rem);color:var(--blanc);letter-spacing:.05em;line-height:.95;margin-bottom:32px;}
+.booking-form{display:flex;gap:12px;flex-wrap:wrap;}
+.b-input{padding:16px 20px;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.2);color:var(--blanc);font-family:'Barlow',sans-serif;font-size:.9rem;outline:none;flex:1;min-width:160px;}
+.b-input::placeholder{color:rgba(240,236,228,.5);}
+.b-input:focus{border-color:rgba(255,255,255,.5);}
+.b-btn{padding:16px 40px;background:var(--noir);color:var(--blanc);font-family:'Barlow Condensed',sans-serif;font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;border:none;cursor:pointer;transition:background .2s;white-space:nowrap;}
+.b-btn:hover{background:#111;}
+
+/* FOOTER */
+footer{background:var(--gris);padding:60px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:60px;border-top:1px solid rgba(255,255,255,.05);}
+.f-logo{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.2em;color:var(--blanc);margin-bottom:12px;}
+.f-logo span{color:var(--rouge);}
+.f-sub{font-size:.85rem;color:var(--texte);line-height:1.7;}
+.f-title{font-family:'Barlow Condensed',sans-serif;font-size:.75rem;letter-spacing:.3em;text-transform:uppercase;color:var(--rouge);margin-bottom:20px;}
+.f-col p,.f-col a{font-size:.9rem;color:var(--texte);line-height:1.9;text-decoration:none;display:block;transition:color .2s;}
+.f-col a:hover{color:var(--blanc);}
+.f-bottom{background:var(--noir);padding:20px 60px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.03);}
+.f-bottom p{font-size:.75rem;color:rgba(138,138,138,.5);letter-spacing:.05em;}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@media(max-width:768px){nav{padding:0 20px;}.nav-links{display:none;}.hero{grid-template-columns:1fr;}.hero-right{display:none;}.hero-left{padding:60px 20px;}.services,.team,.booking,footer{padding:60px 20px;}.services-grid,.team-grid{grid-template-columns:1fr;}.services-header{flex-direction:column;gap:20px;}.services-header p{text-align:left;}.f-bottom{flex-direction:column;gap:8px;padding:20px;}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">BLA<span>D</span>E</div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#team">L'équipe</a></li>
+    <li><a href="#booking">Réserver</a></li>
+  </ul>
+  <a href="#booking" class="nav-cta">Prendre RDV</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-num">01</div>
+    <div class="hero-tag">Barbershop · Paris 11e · Depuis 2015</div>
+    <h1>L'ART<br>DU <span class="line-red">RASAGE</span><br>PARFAIT</h1>
+    <p class="hero-sub">Coupe, barbe, rasage au couteau. Nous prenons le temps de vous écouter pour un résultat qui vous ressemble vraiment.</p>
+    <div class="hero-btns">
+      <a href="#booking" class="btn-r">Réserver maintenant</a>
+      <a href="#services" class="btn-ghost">Nos services</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-icon-big">✂️</div>
+    <div class="hero-card">
+      <span class="scissors">✂️</span>
+      <div class="hero-card-text">Est. 2015 · Paris</div>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="services">
+  <div class="services-header">
+    <h2>NOS SERVICES</h2>
+    <p>Chaque prestation est réalisée avec soin par un barbier expérimenté.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <span class="service-icon">✂️</span>
+      <div class="service-name">Coupe Homme</div>
+      <p class="service-desc">Coupe sur mesure adaptée à votre morphologie, votre style et vos envies. Inclut shampoing et coiffage.</p>
+      <div class="service-price">25€</div>
+      <div class="service-time">45 MIN</div>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🪒</span>
+      <div class="service-name">Rasage Couteau</div>
+      <p class="service-desc">Rasage traditionnel au couteau droit avec serviette chaude, huile de rasage et après-rasage artisanal.</p>
+      <div class="service-price">30€</div>
+      <div class="service-time">30 MIN</div>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🧔</span>
+      <div class="service-name">Taille de Barbe</div>
+      <p class="service-desc">Contours nets, forme parfaite. Votre barbe sculptée et entretenue avec les meilleurs produits.</p>
+      <div class="service-price">20€</div>
+      <div class="service-time">20 MIN</div>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">⭐</span>
+      <div class="service-name">Forfait Complet</div>
+      <p class="service-desc">Coupe + barbe + rasage au couteau. Le combo parfait pour ressortir entièrement transformé.</p>
+      <div class="service-price">60€</div>
+      <div class="service-time">90 MIN</div>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">👦</span>
+      <div class="service-name">Coupe Enfant</div>
+      <p class="service-desc">Pour les garçons jusqu'à 12 ans. Ambiance détendue, patience garantie.</p>
+      <div class="service-price">18€</div>
+      <div class="service-time">30 MIN</div>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">💆</span>
+      <div class="service-name">Soin du Cuir Chevelu</div>
+      <p class="service-desc">Massage crânien, masque nourrissant, rinçage. Un moment de détente profonde.</p>
+      <div class="service-price">35€</div>
+      <div class="service-time">40 MIN</div>
+    </div>
+  </div>
+</section>
+
+<section id="team" class="team">
+  <div class="team-tag">Nos barbiers</div>
+  <h2>L'ÉQUIPE</h2>
+  <div class="team-grid">
+    <div class="team-card">
+      <div class="team-photo">✂️</div>
+      <div class="team-info">
+        <div class="team-name">Karim Benali</div>
+        <div class="team-role">Fondateur & Barbier Senior</div>
+        <p class="team-exp">12 ans d'expérience. Formé à Londres et Milan. Spécialiste du rasage au couteau droit.</p>
+      </div>
+    </div>
+    <div class="team-card">
+      <div class="team-photo">🪒</div>
+      <div class="team-info">
+        <div class="team-name">Lucas Morel</div>
+        <div class="team-role">Barbier</div>
+        <p class="team-exp">7 ans d'expérience. Expert en dégradés et barbes complexes. Touche artistique unique.</p>
+      </div>
+    </div>
+    <div class="team-card">
+      <div class="team-photo">🧔</div>
+      <div class="team-info">
+        <div class="team-name">Antoine Dubois</div>
+        <div class="team-role">Barbier Junior</div>
+        <p class="team-exp">3 ans d'expérience. Passionné par les coiffures contemporaines et le style urbain.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="booking" class="booking">
+  <div class="booking-inner">
+    <div class="booking-tag">Réservation en ligne</div>
+    <h2>RÉSERVEZ<br>VOTRE<br>SÉANCE</h2>
+    <div class="booking-form">
+      <input class="b-input" type="text" placeholder="Votre prénom">
+      <input class="b-input" type="date">
+      <select class="b-input" style="cursor:pointer;">
+        <option value="" disabled selected>Choisir un service</option>
+        <option>Coupe Homme — 25€</option>
+        <option>Rasage Couteau — 30€</option>
+        <option>Taille de Barbe — 20€</option>
+        <option>Forfait Complet — 60€</option>
+      </select>
+      <button class="b-btn">Confirmer →</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>
+    <div class="f-logo">BLA<span>D</span>E</div>
+    <p class="f-sub">Le barbershop de référence<br>dans le 11e arrondissement<br>depuis 2015.</p>
+  </div>
+  <div class="f-col">
+    <div class="f-title">Horaires</div>
+    <p>Lun – Sam : 9h – 20h</p>
+    <p>Dimanche : 10h – 17h</p>
+    <p>Fermé le lundi matin</p>
+  </div>
+  <div class="f-col">
+    <div class="f-title">Contact</div>
+    <p>47 rue de la Roquette, 75011 Paris</p>
+    <a href="tel:+33145678901">01 45 67 89 01</a>
+    <a href="mailto:bonjour@blade-paris.fr">bonjour@blade-paris.fr</a>
+  </div>
+</footer>
+<div class="f-bottom">
+  <p>© 2024 BLADE Barbershop — Tous droits réservés</p>
+  <p style="color:rgba(192,57,43,.4);font-size:.75rem;">Site réalisé avec soin</p>
+</div>
+</body>
+</html>
